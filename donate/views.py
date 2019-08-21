@@ -18,4 +18,5 @@ class LoginView(View):
             login(request, user)
             if request.user.is_superuser:
                 return redirect('/admin')
-
+            else:
+                return redirect('/')
