@@ -17,12 +17,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from donate.views import LoginView
+from donate.views import LoginView, MainPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
+    url(r'^$', MainPageView.as_view(), name='home'),
     url(r'^login$', LoginView.as_view(), name='login'),
 
 ]

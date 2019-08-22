@@ -9,41 +9,37 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
   </head>
   <body>
-    <header class="header--main-page">
+  {% block content %}
+
+  <header class="header--main-page">
       <nav class="container container--70">
-        <ul class="nav--actions">
-            {% if user.is_authenticated %}
-                Witaj {{ user.get_username }}
-                <a href="/accounts/logout/ ">Wyloguj</a>
-            {% else %}
-                <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
-                <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
-            {% endif %}
-        </ul>
-
-        <ul>
-          <li><a href="#start" class="btn btn--without-border active">Start</a></li>
-          <li><a href="#steps" class="btn btn--without-border">O co chodzi?</a></li>
-          <li><a href="#about" class="btn btn--without-border">O nas</a></li>
-          <li><a href="#organizations" class="btn btn--without-border">Fundacje i organizacje</a></li>
-          <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
-        </ul>
-      </nav>
-{% block content %}
-      <div class="slogan container container--90" id="start">
-        <div class="slogan--item">
-          <h1>
-            Zacznij pomagać!<br />
-            Oddaj niechciane rzeczy w zaufane ręce
-          </h1>
-
-          <ul class="slogan--buttons">
-            <li><a href="#" class="btn btn--large">Oddaj rzeczy</a></li>
-            <li><a href="#" class="btn btn--large">Zorganizuj zbiórkę</a></li>
+          <ul class="nav--actions">
+              <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
+              <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
           </ul>
-        </div>
-      </div>
-    </header>
+
+          <ul>
+              <li><a href="#start" class="btn btn--without-border active">Start</a></li>
+              <li><a href="#steps" class="btn btn--without-border">O co chodzi?</a></li>
+              <li><a href="#about" class="btn btn--without-border">O nas</a></li>
+              <li><a href="#organizations" class="btn btn--without-border">Fundacje i organizacje</a></li>
+              <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
+          </ul>
+      </nav>
+          <div class="slogan container container--90" id="start">
+              <div class="slogan--item">
+                  <h1>
+                      Zacznij pomagać!<br />
+                      Oddaj niechciane rzeczy w zaufane ręce
+                  </h1>
+
+                  <ul class="slogan--buttons">
+                      <li><a href="#" class="btn btn--large">Oddaj rzeczy</a></li>
+                      <li><a href="#" class="btn btn--large">Zorganizuj zbiórkę</a></li>
+                  </ul>
+              </div>
+          </div>
+          </header>
 
     <section class="stats">
       <div class="container container--85">

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
@@ -20,3 +21,13 @@ class LoginView(View):
                 return redirect('/admin')
             else:
                 return redirect('/')
+        else:
+            return HttpResponse('bledne dane logowania')
+
+
+class MainPageView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return render(request, 'form.html')
+        else:
+            return render(request, 'index.html')
