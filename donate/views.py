@@ -1,9 +1,31 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views import View
+from django.views import View, generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
+from .forms import LoginForm, CustomUserCreationForm
+from django.contrib import messages
+from django.urls import reverse_lazy
+from .models import User
+
+
+class MainPageView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return render(request, 'form.html')
+        else:
+            return render(request, 'index.html')
+
+
+class RegisterView(View):
+    def get(self, request):
+        form = CustomUserCreationForm()
+        return render(request, 'register.html', {'form': form})
+
+    def post(self, request):
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user()
 
 
 class LoginView(View):
@@ -23,11 +45,3 @@ class LoginView(View):
                 return redirect('/')
         else:
             return HttpResponse('bledne dane logowania')
-
-
-class MainPageView(View):
-    def get(self, request):
-        if request.user.is_authenticated:
-            return render(request, 'form.html')
-        else:
-            return render(request, 'index.html')

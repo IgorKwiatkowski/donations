@@ -9,11 +9,9 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='hasło')
 
 
-class CustomUserCreationForm(UserCreationForm):
-
-    class Meta(UserCreationForm):
-        model = User
-        fields = ('username', 'email')
+class CustomUserCreationForm(forms.Form):
+    email = forms.CharField(label='Email')
+    password = forms.CharField(widget=forms.PasswordInput, label='hasło')
 
 
 class CustomUserChangeForm(UserChangeForm):
