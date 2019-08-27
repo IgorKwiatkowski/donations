@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, CustomUserCreationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from .models import User
+from donate.models import User
 
 
 class MainPageView(View):
@@ -25,7 +25,10 @@ class RegisterView(View):
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            new_user = User.objects.create_user()
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            new_user = User.objects.create_user(email=email, password=password)
+            return redirect('/login')
 
 
 class LoginView(View):
