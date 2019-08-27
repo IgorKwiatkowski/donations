@@ -29,6 +29,8 @@ class RegisterView(View):
             password = form.cleaned_data['password']
             new_user = User.objects.create_user(email=email, password=password)
             return redirect('/login')
+        else:
+            return HttpResponse('błędy w formularzu')  #TODO zrobić ładniej
 
 
 class LoginView(View):
