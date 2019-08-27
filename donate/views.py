@@ -19,11 +19,11 @@ class MainPageView(View):
 
 class RegisterView(View):
     def get(self, request):
-        form = CustomUserCreationForm()
+        form = LoginForm()
         return render(request, 'register.html', {'form': form})
 
     def post(self, request):
-        form = CustomUserCreationForm(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']

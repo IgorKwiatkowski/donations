@@ -21,12 +21,16 @@
       <h2>Załóż konto</h2>
       <form action="#" method="POST">
       {% csrf_token %}
-       {{ form.as_table }}
-
-        <div class="form-group form-group--buttons">
+      <div class="form-group">
+          {{ form.email }}
+      </div>
+      <div class="form-group">
+          {{ form.password }}
+      </div>
+      <div class="form-group form-group--buttons">
           <a href="/login" class="btn btn--without-border">Zaloguj się</a>
           <button class="btn" type="submit">Załóż konto</button>
-        </div>
+      </div>
       </form>
     </section>
 {% endblock %}
