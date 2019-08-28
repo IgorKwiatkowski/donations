@@ -349,6 +349,11 @@
   <script>
     $('input[name=products]').change(function() {
        console.log(this.value);
+       let selected_product_type = this.value
     });
+    $('input[name=bags]').change(function () {
+        let selected_bags = parseInt(this.value);
+        console.log(selected_bags)
+    })
   </script>
 {% endblock %}
