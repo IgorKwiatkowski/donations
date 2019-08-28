@@ -6,13 +6,17 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, CustomUserCreationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from donate.models import User
+from donate.models import User, ProductType
 
 
 class MainPageView(View):
     def get(self, request):
         if request.user.is_authenticated:
-            return render(request, 'form.html')
+            product_types = ProductType.objects.all()
+            ctx = {
+                'product_types': product_types,
+                   }
+            return render(request, 'form.html', ctx)
         else:
             return render(request, 'index.html')
 

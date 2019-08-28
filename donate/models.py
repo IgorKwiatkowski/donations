@@ -51,10 +51,14 @@ class User(AbstractUser):
 
 class Organization(models.Model):
     name = models.CharField(max_length=128)
+    # typy: fundacja, organizacja pozarzadowa, lokalna zbiorka
+    # cel
+    # preferowany typ
 
 
 class ProductType(models.Model):
     name = models.CharField(max_length=128)
+    description = models.TextField()
 
 
 class Donation(models.Model):
