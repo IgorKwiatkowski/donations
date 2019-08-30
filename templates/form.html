@@ -131,12 +131,11 @@
             <h3>Lokalizacja:</h3>
 
             <div class="form-group form-group--dropdown">
-              <select name="localization">
+              <select name="localization" id="cityselector">
                 <option value="0">- wybierz -</option>
-                <option value="warsaw">Warszawa</option>
-                <option value="wroclaw">Wrocław</option>
-                <option value="poznan">Poznań</option>
-                <option value="gdansk">Gdańsk</option>
+                {% for location in locations %}
+                <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
               </select>
             </div>
 
@@ -355,6 +354,13 @@
     $('input[name=bags]').change(function () {
         let selected_bags = parseInt(this.value);
         console.log(selected_bags)
+    });
+    $('div.dropdown > div:nth-child(1)').change(function () {
+        console.log('klik')
+
+    {#$('select[name=localization]').change(function () {#}
+    {#    console.log('klik')#}
+    {#    let chosen_location = parseInt(this.value);#}
     })
   </script>
 {% endblock %}
