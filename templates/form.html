@@ -95,6 +95,7 @@
                   type="radio"
                   name="products"
                   value="{{ type.name }}"
+                  data-productid="{{ type.id }}"
                 />
                 <span class="checkbox"></span>
                 <span class="description">{{ type.description }}</span>
@@ -348,8 +349,8 @@
 {% block javascript %}
   <script>
     $('input[name=products]').change(function() {
-       console.log(this.value);
-       let selected_product_type = this.value
+        let selected_product_type = this.dataset.productid;
+        console.log(selected_product_type);
     });
     $('input[name=bags]').change(function () {
         let selected_bags = parseInt(this.value);
