@@ -49,16 +49,29 @@ class User(AbstractUser):
         return self.email
 
 
-class Organization(models.Model):
+class Location(models.Model):
     name = models.CharField(max_length=128)
-    # typy: fundacja, organizacja pozarzadowa, lokalna zbiorka
-    # cel
-    # preferowany typ
+
+
+class OrganizationType(models.Model):
+    name = models.CharField(max_length=128)
 
 
 class ProductType(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField()
+
+
+class Cause(models.Model):
+    name = models.CharField(max_length=256)
+
+
+class Organization(models.Model):
+    name = models.CharField(max_length=128)
+    location = models.ManyToManyField(Location)
+    type = models.ForeignKey(OrganizationType, on_delete=models.SET_NULL, null=True)
+    preferred_product = models.ManyToManyField(ProductType)
+    cause = models.ManyToManyField(Cause)
 
 
 class Donation(models.Model):

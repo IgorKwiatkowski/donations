@@ -349,7 +349,7 @@
 {% block javascript %}
   <script>
     $('input[name=products]').change(function() {
-        let selected_product_type = this.dataset.productid;
+        let selected_product_type = parseInt(this.dataset.productid);
         console.log(selected_product_type);
     });
     $('input[name=bags]').change(function () {
