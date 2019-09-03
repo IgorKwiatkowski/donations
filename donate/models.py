@@ -64,6 +64,9 @@ class ProductType(models.Model):
 
 class Cause(models.Model):
     name = models.CharField(max_length=256)
+    language_dependent_description = models.CharField(max_length=256)  # możliwe że można tu dać null=True
+                                                                    # lub default taki sam jak name, ponieważ niektóre
+                                                                    # języki nie potrzebują tego pola
 
 
 class Organization(models.Model):

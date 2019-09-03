@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, CustomUserCreationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from donate.models import User, ProductType, Location
+from donate.models import User, ProductType, Location, Cause
 
 
 class MainPageView(View):
@@ -14,9 +14,11 @@ class MainPageView(View):
         if request.user.is_authenticated:
             product_types = ProductType.objects.all()
             locations = Location.objects.all()
+            causes = Cause.objects.all()
             ctx = {  # TODO to chyba wyrzucić do context processora
                 'product_types': product_types,
                 'locations': locations,
+                'causes': causes,
             }
             return render(request, 'form.html', ctx)
         else:

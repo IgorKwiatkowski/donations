@@ -142,40 +142,14 @@
             <div class="form-section">
               <h4>Komu chcesz pomóc?</h4>
               <div class="form-section--checkboxes">
+              {% for cause in causes %}
                 <div class="form-group form-group--checkbox">
                   <label>
-                    <input type="checkbox" name="help[]" value="children" />
-                    <span class="checkbox">dzieciom</span>
+                    <input type="radio" name="help" value="{{ cause.id }}" data-causeid="{{ cause.id }}" />
+                    <span class="checkbox">{{ cause.language_dependent_description }}</span>
                   </label>
                 </div>
-
-                <div class="form-group form-group--checkbox">
-                  <label>
-                    <input type="checkbox" name="help[]" value="mothers" />
-                    <span class="checkbox">samotnym matkom</span>
-                  </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                  <label>
-                    <input type="checkbox" name="help[]" value="homeless" />
-                    <span class="checkbox">bezdomnym</span>
-                  </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                  <label>
-                    <input type="checkbox" name="help[]" value="disabled" />
-                    <span class="checkbox">niepełnosprawnym</span>
-                  </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                  <label>
-                    <input type="checkbox" name="help[]" value="old" />
-                    <span class="checkbox">osobom starszym</span>
-                  </label>
-                </div>
+              {% endfor %}
               </div>
             </div>
 
@@ -355,5 +329,13 @@
         let selected_bags = parseInt(this.value);
         console.log(selected_bags)
     });
+    $('input[name=help]').change(function () {
+        let selected_cause = parseInt(this.dataset.causeid);
+        console.log(selected_cause)
+    });
+    $('textarea[name=organization_search]').change(function () {
+        let search_query = this.value;
+        console.log(search_query)
+    })
   </script>
 {% endblock %}
