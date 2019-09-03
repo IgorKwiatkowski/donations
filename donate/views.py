@@ -14,10 +14,10 @@ class MainPageView(View):
         if request.user.is_authenticated:
             product_types = ProductType.objects.all()
             locations = Location.objects.all()
-            ctx = {
+            ctx = {  # TODO to chyba wyrzucić do context processora
                 'product_types': product_types,
                 'locations': locations,
-                   }
+            }
             return render(request, 'form.html', ctx)
         else:
             return render(request, 'index.html')
@@ -36,7 +36,7 @@ class RegisterView(View):
             new_user = User.objects.create_user(email=email, password=password)
             return redirect('/login')
         else:
-            return HttpResponse('błędy w formularzu')  #TODO zrobić ładniej
+            return HttpResponse('błędy w formularzu')  # TODO zrobić ładniej
 
 
 class LoginView(View):

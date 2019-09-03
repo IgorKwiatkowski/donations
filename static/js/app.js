@@ -132,6 +132,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (target.tagName === "LI") {
           this.valueInput.value = target.dataset.value;
           this.current.innerText = target.innerText;
+          let chosen_location = parseInt(target.dataset.value);
+          console.log(chosen_location);
         }
       });
     }
