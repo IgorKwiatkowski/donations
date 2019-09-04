@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 
 
+
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 
@@ -52,21 +53,33 @@ class User(AbstractUser):
 class Location(models.Model):
     name = models.CharField(max_length=128)
 
+    def __str__(self):
+        return self.name
+
 
 class OrganizationType(models.Model):
     name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
 
 
 class ProductType(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class Cause(models.Model):
     name = models.CharField(max_length=256)
     language_dependent_description = models.CharField(max_length=256)  # możliwe że można tu dać null=True
-                                                                    # lub default taki sam jak name, ponieważ niektóre
-                                                                    # języki nie potrzebują tego pola
+
+    # lub default taki sam jak name, ponieważ niektóre
+    # języki nie potrzebują tego pola
+    def __str__(self):
+        return self.name
 
 
 class Organization(models.Model):
@@ -76,6 +89,9 @@ class Organization(models.Model):
     preferred_product = models.ManyToManyField(ProductType)
     cause = models.ManyToManyField(Cause)
 
+    def __str__(self):
+        return self.name
+
 
 class Donation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -84,3 +100,6 @@ class Donation(models.Model):
     number_of_bags = models.IntegerField()
     pickup_address = models.CharField(max_length=128)
     complete = models.BooleanField(default=False)
+
+    def __str__(self):
+        return 'Darowizna nr ' + str(self.id)

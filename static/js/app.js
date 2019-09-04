@@ -45,6 +45,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Current slide
       this.currentSlide = $btn.parentElement.dataset.id;
+      console.log(this.currentSlide)
+      if (this.currentSlide == 4) {
+        $.ajax({
+            url: "http://127.0.0.1:8000/get-organizations",
+            type: "GET",
+            dataType: "json",
+        })
+        .done((data) => {
+                    // {#$('div[data-step=4]').html("")#}
+
+                    $(data).each((idx, el) => {
+                    let organization = $(`
+                      <div class="form-group form-group--checkbox">
+                        <label>
+                          <input type="radio" name="organization" value="${el.pk}" />
+                          <span class="checkbox radio"></span>
+                          <span class="description">
+                          <div class="title">${el.fields.name}</div>
+                          <div class="subtitle">
+                            Cel i misja: Pomoc dla osób nie posiadających miejsca
+                            zamieszkania
+                          </div>
+                        </span>
+                      </label>
+                    </div>
+                        `)
+
+
+                   $('div[data-step=4] h3').after(organization)
+
+                    })
+                })
+      }
 
       // Slides active class change
       this.$slidesContainers.forEach(el => {
@@ -132,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (target.tagName === "LI") {
           this.valueInput.value = target.dataset.value;
           this.current.innerText = target.innerText;
-          let chosen_location = parseInt(target.dataset.value);
+          window.chosen_location = parseInt(target.dataset.value);
           console.log(chosen_location);
         }
       });
@@ -222,7 +255,44 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     updateForm() {
       this.$step.innerText = this.currentStep;
+      if (this.currentStep == 4) {
+        $.ajax({
+          url: "http://127.0.0.1:8000/get-organizations",
+          type: "GET",
+          dataType: "json",
+          data: {
+            product: window.selected_product_type,
+            cause: window.selected_cause,
+            query: window.search_query,
+            location: window.chosen_location,
+          }
+        })
+            .done((data) => {
+              $('div[data-step=4] > div.form-group--checkbox').remove()
 
+              $(data).each((idx, el) => {
+                let organization = $(`
+                      <div class="form-group form-group--checkbox">
+                        <label>
+                          <input type="radio" name="organization" value="${el.pk}" />
+                          <span class="checkbox radio"></span>
+                          <span class="description">
+                          <div class="title">${el.fields.name}</div>
+                          <div class="subtitle">
+                            Cel i misja: Pomoc dla osób nie posiadających miejsca
+                            zamieszkania
+                          </div>
+                        </span>
+                      </label>
+                    </div>
+                        `)
+
+
+                $('div[data-step=4] h3').after(organization)
+
+              })
+            })
+      }
       // TODO: Validation
 
       this.slides.forEach(slide => {
@@ -254,4 +324,24 @@ document.addEventListener("DOMContentLoaded", function() {
   if (form !== null) {
     new FormSteps(form);
   }
+      $('input[name=products]').change(function() {
+        window.selected_product_type = parseInt(this.dataset.productid);
+        console.log(selected_product_type);
+    });
+    $('input[name=bags]').change(function () {
+        window.selected_bags = parseInt(this.value);
+        console.log(selected_bags)
+    });
+    $('input[name=help]').change(function () {
+        window.selected_cause = parseInt(this.dataset.causeid);
+        console.log(selected_cause)
+    });
+    $('textarea[name=organization_search]').change(function () {
+        window.search_query = this.value;
+        console.log(search_query)
+    })
+    $(document).on('change', 'input[name=organization]', function() {
+      window.selected_organization = parseInt(this.value);
+      console.log(selected_organization)
+    });
 });

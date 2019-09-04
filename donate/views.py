@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View, generic
 from django.contrib.auth.decorators import login_required
@@ -6,7 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, CustomUserCreationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from donate.models import User, ProductType, Location, Cause
+from donate.models import User, ProductType, Location, Cause, Organization
+from django.core import serializers
 
 
 class MainPageView(View):
@@ -58,3 +59,30 @@ class LoginView(View):
                 return redirect('/')
         else:
             return HttpResponse('bledne dane logowania')
+
+
+class SendOrganizationsJSONView(View):
+    def get(self, request):
+        product = request.GET.get('product')
+        cause = request.GET.get('cause')
+        location = request.GET.get('location')
+
+        organizations = Organization.objects.all()
+        if location:
+            organizations = organizations.filter(location__id=location)
+        if product:
+            organizations = organizations.filter(preferred_product__id=product)
+        if cause:
+            organizations = organizations.filter(cause__id=cause)
+        data = serializers.serialize('json', organizations)
+        # orgs = Organization.objects.all()
+        # for org in orgs:
+        #     new_dict = {
+        #         'id' = org
+        #     }
+        # responseData = {
+        #     'id': 4,
+        #     'name': 'Test Response',
+        #     'roles': ['Admin', 'User']
+        # }
+        return HttpResponse(data)

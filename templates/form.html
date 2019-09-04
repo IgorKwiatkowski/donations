@@ -167,41 +167,13 @@
           </div>
 
           <!-- STEP 4 -->
+
           <div data-step="4">
-            <h3>Wybierz organizacje, której chcesz pomóc:</h3>
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="radio" name="organization" value="old" />
-                <span class="checkbox radio"></span>
-                <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
-                  </div>
-                </span>
-              </label>
-            </div>
-
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="radio" name="organization" value="old" />
-                <span class="checkbox radio"></span>
-                <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-              </label>
-            </div>
-
-            <div class="form-group form-group--buttons">
-              <button type="button" class="btn prev-step">Wstecz</button>
-              <button type="button" class="btn next-step">Dalej</button>
-            </div>
+              <h3>Wybierz organizacje, której chcesz pomóc:</h3>
+              <div class="form-group form-group--buttons">
+                 <button type="button" class="btn prev-step">Wstecz</button>
+                <button type="button" class="btn next-step">Dalej</button>
+             </div>
           </div>
 
           <!-- STEP 5 -->
@@ -321,21 +293,8 @@
 {% endblock %}
 {% block javascript %}
   <script>
-    $('input[name=products]').change(function() {
-        let selected_product_type = parseInt(this.dataset.productid);
-        console.log(selected_product_type);
-    });
-    $('input[name=bags]').change(function () {
-        let selected_bags = parseInt(this.value);
-        console.log(selected_bags)
-    });
-    $('input[name=help]').change(function () {
-        let selected_cause = parseInt(this.dataset.causeid);
-        console.log(selected_cause)
-    });
-    $('textarea[name=organization_search]').change(function () {
-        let search_query = this.value;
-        console.log(search_query)
-    })
+
+
+
   </script>
 {% endblock %}

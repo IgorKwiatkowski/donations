@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from donate.views import LoginView, MainPageView, RegisterView
+from donate.views import LoginView, MainPageView, RegisterView, SendOrganizationsJSONView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^$', MainPageView.as_view(), name='home'),
     url(r'^login$', LoginView.as_view(), name='login'),
     url(r'^register$', RegisterView.as_view(), name='register'),
+    url(r'^get-organizations$', SendOrganizationsJSONView.as_view(), name='get_organizations'),
 
 ]
