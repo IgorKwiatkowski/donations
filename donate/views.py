@@ -75,14 +75,11 @@ class SendOrganizationsJSONView(View):
         if cause:
             organizations = organizations.filter(cause__id=cause)
         data = serializers.serialize('json', organizations)
-        # orgs = Organization.objects.all()
-        # for org in orgs:
-        #     new_dict = {
-        #         'id' = org
-        #     }
-        # responseData = {
-        #     'id': 4,
-        #     'name': 'Test Response',
-        #     'roles': ['Admin', 'User']
-        # }
+
         return HttpResponse(data)
+
+
+class GetOrganizationNameView(View):
+    def get(self, request, id):
+        organization = Organization.objects.get(id=id)
+        return HttpResponse(organization.name)

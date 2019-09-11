@@ -292,7 +292,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
               })
             })
+      } else if (this.currentStep == 5) {
+
       }
+
       // TODO: Validation
 
       this.slides.forEach(slide => {
@@ -339,9 +342,38 @@ document.addEventListener("DOMContentLoaded", function() {
     $('textarea[name=organization_search]').change(function () {
         window.search_query = this.value;
         console.log(search_query)
-    })
+    });
     $(document).on('change', 'input[name=organization]', function() {
       window.selected_organization = parseInt(this.value);
+
       console.log(selected_organization)
+    });
+    $('input[name=address]').change(function () {
+      window.pickup_address = this.value;
+      console.log(pickup_address)
+    });
+    $('input[name=city]').change(function () {
+      window.city = this.value;
+      console.log(city)
+    });
+    $('input[name=postcode]').change(function () {
+      window.postcode = this.value;
+      console.log(postcode)
+    });
+    $('input[name=phone]').change(function () {
+      window.phone = this.value;
+      console.log(phone)
+    });
+    $('input[name=data]').change(function () {
+      window.pickup_date = this.value;
+      console.log(pickup_date)
+    });
+    $('input[name=time]').change(function () {
+      window.pickup_time = this.value;
+      console.log(pickup_time)
+    });
+    $('input[name=more_info]').change(function () {
+      window.pickup_notes = this.value;
+      console.log(pickup_notes)
     });
 });
